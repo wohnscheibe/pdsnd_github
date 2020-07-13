@@ -32,7 +32,7 @@ def get_filters():
                 city  = 'washington'
                 break
             else:
-                false = input('\nNot a valid input. Try again? Enter y=yes or n=no.\n').lower()
+                false = input('\nNot a valid input. Try again? Enter y=yes or any other key to abort.\n').lower()
                 if false != 'y':
                     city = 'quit'
                     month = 'quit'
@@ -69,7 +69,7 @@ def get_filters():
                 month  = 'june'
                 break
             else:
-                false = input('\nNot a valid input. Try again? Enter y=yes or n=no.\n').lower()
+                false = input('\nNot a valid input. Try again? Enter y=yes or any other key to abort.\n').lower()
                 if false != 'y':
                     month = 'quit'
                     day = 'quit'
@@ -106,7 +106,7 @@ def get_filters():
                 day  = 'sunday'
                 break
             else:
-                false = input('\nNot a valid input. Try again? Enter y=yes or n=no.\n').lower()
+                false = input('\nNot a valid input. Try again? Enter y=yes or any other key to abort.\n').lower()
                 if false != 'y':
                     day  = 'quit'
                     break
@@ -267,14 +267,14 @@ def user_stats(df):
 def raw_data(df):
     while True:
         """Displays five rows of raw data. """
-        raw_start = input('\nWould you like to see some raw data? Enter y=yes or n=no\n')
+        raw_start = input('\nWould you like to see some raw data? Enter y=yes or any other key to abort\n')
         if raw_start.lower() != 'y':
             break
 
         stop = len(df['Start Time'])
         for line in range(0, stop, 5):
             print(df[line:line+5])
-            restart = input('\nWould you like to see five more rows? Enter y=yes or n=no\n')
+            restart = input('\nWould you like to see five more rows? Enter y=yes or any other key to abort\n')
             if restart.lower() != 'y':
                 break
         break
@@ -295,7 +295,7 @@ def main():
         user_stats(df)
         raw_data(df)
 
-        restart = input('\nWould you like to restart? Enter y=yes or n=no\n')
+        restart = input('\nWould you like to restart? Enter y=yes or any other key to abort\n')
         if restart.lower() != 'y':
             break
 
