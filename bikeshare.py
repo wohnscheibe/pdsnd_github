@@ -1,3 +1,9 @@
+"""
+Information about the Udacity course:
+https://www.udacity.com/course/programming-for-data-science-nanodegree--nd104
+"""
+
+
 import time
 import datetime as dt
 import pandas as pd
