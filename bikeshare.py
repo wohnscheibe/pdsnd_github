@@ -227,10 +227,10 @@ def trip_duration_stats(df):
     print('-'*40)
 
 
-def user_stats(df):
-    """Displays statistics on bikeshare users."""
+def user_types(df):
+    """Displays statistics on user types."""
 
-    print('\nCalculating User Stats...\n')
+    print('\nCalculating User types...\n')
     start_time = time.time()
 
     # Display counts of user types
@@ -239,26 +239,34 @@ def user_stats(df):
     user_null = df['User Type'].isnull().sum()
     print('No user type data:\t', user_null)
 
-    # In the washington data set is no gender and birth year --> skip
-    if df['place'][0] != 'Washington':
-        # Display counts of gender
-        gender = df['Gender'].value_counts()
-        print('\nCounts of gender:\n', gender)
-        gender_null = df['Gender'].isnull().sum()
-        print('No Gender data:\t', gender_null)
+    print("\nThis took %s seconds." % (time.time() - start_time))
+    print('-'*40)
 
-        # Display earliest, most recent, and most common year of birth
-        year_min = df['Birth Year'].min()
-        print('\nEarliest year of birth\t', year_min)
 
-        year_max = df['Birth Year'].max()
-        print('\nMost recent year of birth\t', year_max)
+def user_stats(df):
+    """Displays statistics on bikeshare users."""
 
-        year_mode = df['Birth Year'].mode()
-        print('Most common year of birth\t', year_mode)
+    print('\nCalculating User Stats...\n')
+    start_time = time.time()
 
-        birth_year_null = df['Birth Year'].isnull().sum()
-        print('No birth year data:\t', birth_year_null)
+    # Display counts of gender
+    gender = df['Gender'].value_counts()
+    print('\nCounts of gender:\n', gender)
+    gender_null = df['Gender'].isnull().sum()
+    print('No Gender data:\t', gender_null)
+
+    # Display earliest, most recent, and most common year of birth
+    year_min = df['Birth Year'].min()
+    print('\nEarliest year of birth\t', year_min)
+
+    year_max = df['Birth Year'].max()
+    print('\nMost recent year of birth\t', year_max)
+
+    year_mode = df['Birth Year'].mode()
+    print('Most common year of birth\t', year_mode)
+
+    birth_year_null = df['Birth Year'].isnull().sum()
+    print('No birth year data:\t', birth_year_null)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -292,7 +300,10 @@ def main():
         time_stats(df, month, day)
         station_stats(df)
         trip_duration_stats(df)
-        user_stats(df)
+        user_types(df)
+        # In the washington data set is no gender and birth year --> skip user_stats
+        if df['place'][0] != 'Washington':
+            user_stats(df)
         raw_data(df)
 
         restart = input('\nWould you like to restart? Enter y=yes or any other key to abort\n')
