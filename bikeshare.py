@@ -162,7 +162,6 @@ def time_stats(df, month, day):
     """Displays statistics on the most frequent times of travel."""
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
-    start_time = time.time()
 
     # display the most common month if not specified
     if month == "all":
@@ -180,7 +179,6 @@ def time_stats(df, month, day):
     popular_hour = df['hour'].mode()[0]
     print('Most Popular Start Hour:\t', popular_hour)
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
@@ -188,7 +186,6 @@ def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
 
     print('Calculating The Most Popular Stations and Trip...\n')
-    start_time = time.time()
 
     # display most commonly used start station
     popular_start_station = df['Start Station'].mode()[0]
@@ -204,8 +201,6 @@ def station_stats(df):
     popular_start_end_station = df['Start_End_Station'].mode()[0]
     print('Most Popular Start End Combination:\t', popular_start_end_station)
 
-
-    print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
@@ -213,7 +208,6 @@ def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
     print('\nCalculating Trip Duration...\n')
-    start_time = time.time()
 
     # display total travel time
     traveltime_total = df['Trip Duration'].sum()
@@ -223,7 +217,6 @@ def trip_duration_stats(df):
     traveltime_mean = df['Trip Duration'].mean()
     print("Mean travel time:\t", traveltime_mean)
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
@@ -231,7 +224,6 @@ def user_types(df):
     """Displays statistics on user types."""
 
     print('\nCalculating User types...\n')
-    start_time = time.time()
 
     # Display counts of user types
     user_types = df['User Type'].value_counts()
@@ -239,7 +231,6 @@ def user_types(df):
     user_null = df['User Type'].isnull().sum()
     print('No user type data:\t', user_null)
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
@@ -247,7 +238,6 @@ def user_stats(df):
     """Displays statistics on bikeshare users."""
 
     print('\nCalculating User Stats...\n')
-    start_time = time.time()
 
     # Display counts of gender
     gender = df['Gender'].value_counts()
@@ -268,7 +258,6 @@ def user_stats(df):
     birth_year_null = df['Birth Year'].isnull().sum()
     print('No birth year data:\t', birth_year_null)
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
