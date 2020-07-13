@@ -17,6 +17,8 @@ You will also write a script that takes in raw input to create an interactive
 experience in the terminal to present these statistics.
 
 ### Files used
+bikeshare.py
+csv with bikeshare data isn't included in the repository
 
 
 ### Credits
