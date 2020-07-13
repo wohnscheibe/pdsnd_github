@@ -41,7 +41,7 @@ def get_filters():
                 city  = 'washington'
                 break
             else:
-                false = input('\nNot a valid input. Try again? Enter y=yes or n=no.\n').lower()
+                false = input('\nNot a valid input. Try again? Enter y=yes or any other key to abort.\n').lower()
                 if false != 'y':
                     city = 'quit'
                     month = 'quit'
@@ -78,7 +78,7 @@ def get_filters():
                 month  = 'june'
                 break
             else:
-                false = input('\nNot a valid input. Try again? Enter y=yes or n=no.\n').lower()
+                false = input('\nNot a valid input. Try again? Enter y=yes or any other key to abort.\n').lower()
                 if false != 'y':
                     month = 'quit'
                     day = 'quit'
@@ -115,7 +115,7 @@ def get_filters():
                 day  = 'sunday'
                 break
             else:
-                false = input('\nNot a valid input. Try again? Enter y=yes or n=no.\n').lower()
+                false = input('\nNot a valid input. Try again? Enter y=yes or any other key to abort.\n').lower()
                 if false != 'y':
                     day  = 'quit'
                     break
@@ -171,7 +171,6 @@ def time_stats(df, month, day):
     """Displays statistics on the most frequent times of travel."""
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
-    start_time = time.time()
 
     # display the most common month if not specified
     if month == "all":
@@ -189,7 +188,6 @@ def time_stats(df, month, day):
     popular_hour = df['hour'].mode()[0]
     print('Most Popular Start Hour:\t', popular_hour)
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
@@ -197,7 +195,6 @@ def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
 
     print('Calculating The Most Popular Stations and Trip...\n')
-    start_time = time.time()
 
     # display most commonly used start station
     popular_start_station = df['Start Station'].mode()[0]
@@ -213,8 +210,6 @@ def station_stats(df):
     popular_start_end_station = df['Start_End_Station'].mode()[0]
     print('Most Popular Start End Combination:\t', popular_start_end_station)
 
-
-    print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
@@ -222,7 +217,6 @@ def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
     print('\nCalculating Trip Duration...\n')
-    start_time = time.time()
 
     # display total travel time
     traveltime_total = df['Trip Duration'].sum()
@@ -232,15 +226,13 @@ def trip_duration_stats(df):
     traveltime_mean = df['Trip Duration'].mean()
     print("Mean travel time:\t", traveltime_mean)
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 
-def user_stats(df):
-    """Displays statistics on bikeshare users."""
+def user_types(df):
+    """Displays statistics on user types."""
 
-    print('\nCalculating User Stats...\n')
-    start_time = time.time()
+    print('\nCalculating User types...\n')
 
     # Display counts of user types
     user_types = df['User Type'].value_counts()
@@ -248,42 +240,47 @@ def user_stats(df):
     user_null = df['User Type'].isnull().sum()
     print('No user type data:\t', user_null)
 
-    # In the washington data set is no gender and birth year --> skip
-    if df['place'][0] != 'Washington':
-        # Display counts of gender
-        gender = df['Gender'].value_counts()
-        print('\nCounts of gender:\n', gender)
-        gender_null = df['Gender'].isnull().sum()
-        print('No Gender data:\t', gender_null)
+    print('-'*40)
 
-        # Display earliest, most recent, and most common year of birth
-        year_min = df['Birth Year'].min()
-        print('\nEarliest year of birth\t', year_min)
 
-        year_max = df['Birth Year'].max()
-        print('\nMost recent year of birth\t', year_max)
+def user_stats(df):
+    """Displays statistics on bikeshare users."""
 
-        year_mode = df['Birth Year'].mode()
-        print('Most common year of birth\t', year_mode)
+    print('\nCalculating User Stats...\n')
 
-        birth_year_null = df['Birth Year'].isnull().sum()
-        print('No birth year data:\t', birth_year_null)
+    # Display counts of gender
+    gender = df['Gender'].value_counts()
+    print('\nCounts of gender:\n', gender)
+    gender_null = df['Gender'].isnull().sum()
+    print('No Gender data:\t', gender_null)
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    # Display earliest, most recent, and most common year of birth
+    year_min = df['Birth Year'].min()
+    print('\nEarliest year of birth\t', year_min)
+
+    year_max = df['Birth Year'].max()
+    print('\nMost recent year of birth\t', year_max)
+
+    year_mode = df['Birth Year'].mode()
+    print('Most common year of birth\t', year_mode)
+
+    birth_year_null = df['Birth Year'].isnull().sum()
+    print('No birth year data:\t', birth_year_null)
+
     print('-'*40)
 
 
 def raw_data(df):
     while True:
         """Displays five rows of raw data. """
-        raw_start = input('\nWould you like to see some raw data? Enter y=yes or n=no\n')
+        raw_start = input('\nWould you like to see some raw data? Enter y=yes or any other key to abort\n')
         if raw_start.lower() != 'y':
             break
 
         stop = len(df['Start Time'])
         for line in range(0, stop, 5):
             print(df[line:line+5])
-            restart = input('\nWould you like to see five more rows? Enter y=yes or n=no\n')
+            restart = input('\nWould you like to see five more rows? Enter y=yes or any other key to abort\n')
             if restart.lower() != 'y':
                 break
         break
@@ -301,10 +298,13 @@ def main():
         time_stats(df, month, day)
         station_stats(df)
         trip_duration_stats(df)
-        user_stats(df)
+        user_types(df)
+        # In the washington data set is no gender and birth year --> skip user_stats
+        if df['place'][0] != 'Washington':
+            user_stats(df)
         raw_data(df)
 
-        restart = input('\nWould you like to restart? Enter y=yes or n=no\n')
+        restart = input('\nWould you like to restart? Enter y=yes or any other key to abort\n')
         if restart.lower() != 'y':
             break
 
