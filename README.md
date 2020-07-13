@@ -22,3 +22,8 @@ csv with bikeshare data isn't included in the repository
 
 
 ### Credits
+Information about Udacity:
+https://www.udacity.com/course/programming-for-data-science-nanodegree--nd104
+
+Forked repository from:
+https://github.com/udacity/pdsnd_github
