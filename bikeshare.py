@@ -1,6 +1,9 @@
 """
 Information about the Udacity course:
 https://www.udacity.com/course/programming-for-data-science-nanodegree--nd104
+
+You'll find my project in github
+https://github.com/wohnscheibe/pdsnd_github
 """
 
 
